@@ -9,11 +9,14 @@ exit.action = () => {
     });
 };
 
-ApiConnector.current(coll => { if (coll.success) { ProfileWidget.showProfile(coll.data); } });
+ApiConnector.current(coll => {
+    if (coll.success) {
+        ProfileWidget.showProfile(coll.data);
+    }
+});
 
 const tab = new RatesBoard;
-//ApiConnector.getStocks((callback) => { if (callback.success) { stt.clearTable();
-//        stt.fillTable(callback.data) } });
+
 function exchangeRate() {
     ApiConnector.getStocks((callback) => {
         if (callback.success) {
@@ -30,8 +33,8 @@ money.addMoneyCallback = (data) => {
     ApiConnector.addMoney(data, (callback) => {
         if (callback.success) {
             ProfileWidget.showProfile(callback.data);
-            money.setMessage("message", "все ок");
-        } else money.setMessage("isError", "ошибка");
+            money.setMessage(true, "все ок");
+        } else money.setMessage(false, "ошибка");
     })
 };
 
@@ -39,8 +42,8 @@ money.conversionMoneyCallback = (data) => {
     ApiConnector.convertMoney(data, (callback) => {
         if (callback.success) {
             ProfileWidget.showProfile(callback.data);
-            money.setMessage("message", "все ок");
-        } else money.setMessage("isError", "ошибка");
+            money.setMessage(true, "все ок");
+        } else money.setMessage(false, "ошибка");
     })
 };
 
@@ -48,8 +51,8 @@ money.sendMoneyCallback = (data) => {
     ApiConnector.transferMoney(data, (callback) => {
         if (callback.success) {
             ProfileWidget.showProfile(callback.data);
-            money.setMessage("message", "все ок");
-        } else money.setMessage("isError", "ошибка");
+            money.setMessage(true, "все ок");
+        } else money.setMessage(false, "ошибка");
     });
 };
 
@@ -69,8 +72,8 @@ avorit.addUserCallback = (data) => {
             avorit.clearTable();
             avorit.fillTable(callback.data);
             money.updateUsersList(callback.data);
-            avorit.setMessage("message", "все ок");
-        } else avorit.setMessage("isError", "ошибка");
+            avorit.setMessage(true, "все ок");
+        } else avorit.setMessage(false, "ошибка");
     });
 };
 
@@ -80,7 +83,7 @@ avorit.removeUserCallback = (data) => {
             avorit.clearTable();
             avorit.fillTable(callback.data);
             money.updateUsersList(callback.data);
-            avorit.setMessage("message", "все ок");
-        } else avorit.setMessage("isError", "ошибка");
+            avorit.setMessage(true, "все ок");
+        } else avorit.setMessage(false, "ошибка");
     });
 };
